@@ -1,3 +1,17 @@
+<?php
+
+if(isset($_GET['delete'])){
+
+  $the_post_id = $_GET['delete'];
+
+$query = "DELETE FROM posts WHERE post_id = {$the_post_id}";
+$delete_query = mysqli_query($connection, $query);
+header("Location: posts.php"); exit;
+
+}
+
+?>
+
 <table class="table table-bordered table-hover">
 
 
@@ -43,6 +57,7 @@
                             echo "<td>{$post_tags}</td>";
                             echo "<td>{$post_comment_count}</td>";
                             echo "<td>{$post_date}</td>";
+                            echo "<td><a href='posts.php?delete={$post_id}'>Delete</a></td>";
                             echo "</tr>";
                             
 
@@ -51,15 +66,15 @@
                             ?>
 
 
-                              <td>10</td>
-                              <td>Loc Tran</td>
-                              <td>Bootstrap Framework</td>
-                              <td>Bootstrap</td>
-                              <td>Status</td>
-                              <td>Image</td>
-                              <td>Tags</td>
-                              <td>Comments</td>
-                              <td>Date</td>
+                              <td><strong>ID</strong></td>
+                              <td><strong>Author</strong></td>
+                              <td><strong>Title</strong></td>
+                              <td><strong>Category</strong></td>
+                              <td><strong>Status</strong></td>
+                              <td><strong>Image</strong></td>
+                              <td><strong>Tags</strong></td>
+                              <td><strong>Comments</strong></td>
+                              <td><strong>Date</strong></td>
 
                             
 
