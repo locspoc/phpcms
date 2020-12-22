@@ -80,7 +80,7 @@ if(isset($_POST['update_post'])) {
 
   <div class="form-group">
 
-  <label for="categories">Categories</label>
+  <label for="categories">Category</label>
 
   <br>
   
@@ -88,7 +88,7 @@ if(isset($_POST['update_post'])) {
     
       <?php 
       
-      $query = "SELECT * FROM categories";
+      $query = "SELECT * FROM categories ";
       $select_categories = mysqli_query($connection, $query);
 
       confirmQuery($select_categories);
@@ -97,7 +97,18 @@ if(isset($_POST['update_post'])) {
       $cat_id = $row['cat_id'];
       $cat_title = $row['cat_title'];
 
-      echo "<option value='{$cat_id}'>{$cat_title}</option>";
+      if($cat_id == $post_category_id) {
+
+      
+        echo "<option selected value='{$cat_id}'>{$cat_title}</option>";
+
+
+        } else {
+
+          echo "<option value='{$cat_id}'>{$cat_title}</option>";
+
+
+        }
 
       }
 
