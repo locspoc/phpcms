@@ -35,7 +35,7 @@ header("Location: posts.php"); exit;
                             <?php 
                             
                             $query = "SELECT * FROM comments";
-                            $select_comments = mysqli_query($connection, $query);
+                            $select_comments = mysqli_query($connection,$query);
                                   
                             while($row = mysqli_fetch_assoc($select_comments)) {
                             $comment_id = $row['comment_id'];
@@ -64,11 +64,11 @@ header("Location: posts.php"); exit;
 
                             echo "<td>{$comment_email}</td>";
                             echo "<td>{$comment_status}</td>";
+                            echo "<td>Some Title</td>";
                             echo "<td>{$comment_date}</td>";
-                            echo "<td><a href='posts.php?source=edit_post&p_id={$post_id}'>Approve</a></td>";
-                            echo "<td><a href='posts.php?delete={$post_id}'>Unapprove</a></td>";
-                            echo "<td><a href='posts.php?source=edit_post&p_id={$post_id}'>Edit</a></td>";
-                            echo "<td><a href='posts.php?delete={$post_id}'>Delete</a></td>";
+                            echo "<td><a href='posts.php?source=edit_post&p_id='>Approve</a></td>";
+                            echo "<td><a href='posts.php?delete='>Unapprove</a></td>";
+                            echo "<td><a href='posts.php?delete='>Delete</a></td>";
                             echo "</tr>";
                             
 
