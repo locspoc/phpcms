@@ -32,17 +32,23 @@ $the_user_id = $_GET['edit_user'];
     $user_password = $_POST['user_password'];
     // $post_date = date('d-m-y');
 
-    // move_uploaded_file($post_image_temp, "../images/$post_image" ); // Must have double quotes ""
+    
 
-    $query = "SELECT randSalt FROM users";
-    $select_randsalt_query = mysqli_query($connection, $query);
-    if(!$select_randsalt_query) {
-        die("Query Failed" . mysqli_error($connection));
+    if(!empty($user_password)) {
+    
+    $query_password = "SELECT user_password FROM users WHERE user_id = $the_user_id";
+    $get_user_query = mysqli_query($connection, $query_password);
+    confirmQuery($get_user_query);
+
+    $row = mysqli_fetch_array($get_user_query);
+
+    $db_user_password = $row['user_password'];
+
+    if($db_user_password != $user_password) {
+
+        $hashed_password = password_hash($user_password, PASSWORD_BCRYPT, array('cost' => 12));
+
     }
-
-    $row = mysqli_fetch_array($select_randsalt_query);
-    $salt = $row['randSalt'];
-    $hashed_password = crypt($user_password, $salt);
 
     $query = "UPDATE users SET ";
     $query .= "user_firstname = '{$user_firstname}', ";
@@ -57,13 +63,13 @@ $the_user_id = $_GET['edit_user'];
 
       confirmQuery($edit_user_query);
 
-  }
+      echo "User Updated" . " <a href='users.php'>View Users?</a>";
 
-} else {  // If the user id is not present in the URL we redirect to the home page
+    }
+}
+} else {
 
-
-  header("Location: index.php");
-
+    header("Location: index.php");
 
 }
 
@@ -111,14 +117,6 @@ $the_user_id = $_GET['edit_user'];
 
 </div>
 
-  <!-- <div class="form-group">
-  
-    <label for="post_image">Post Image</label>
-
-      <input type="file" class="form-control" name="post_image">
-  
-  </div> -->
-
   <div class="form-group">
   
     <label for="username">Username</label>
@@ -139,7 +137,7 @@ $the_user_id = $_GET['edit_user'];
   
   <label for="user_password">Password</label>
 
-<input type="password" value="<?php echo $user_password; ?>" class="form-control" name="user_password">
+<input autocomplete="off" type="password" class="form-control" name="user_password">
   
   </div>
 
