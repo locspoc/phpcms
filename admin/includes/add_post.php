@@ -4,7 +4,8 @@
 
     $post_title = $_POST['title'];
     $post_category_id = $_POST['post_category'];
-    $post_author = $_POST['author'];
+    $post_user = $_POST['post_user'];
+    // $post_user_id = $_POST['post_user_id'];
     $post_status = $_POST['post_status'];
 
     $post_image = $_FILES['post_image']['name'];
@@ -16,9 +17,9 @@
 
     move_uploaded_file($post_image_temp, "../images/$post_image" ); // Must have double quotes ""
 
-    $query = "INSERT INTO posts(post_category_id, post_title, post_author, post_date, post_image, post_content, post_tags, post_status) ";
+    $query = "INSERT INTO posts(post_category_id, post_title, post_user, post_date, post_image, post_content, post_tags, post_status) ";
 
-    $query .= "VALUES('{$post_category_id}', '{$post_title}', '{$post_author}', now(), '{$post_image}', '{$post_content}', '{$post_tags}', '{$post_status}') ";
+    $query .= "VALUES('{$post_category_id}', '{$post_title}', '{$post_user}', now(), '{$post_image}', '{$post_content}', '{$post_tags}', '{$post_status}') ";
 
     $create_post_query = mysqli_query($connection, $query);
 
@@ -45,9 +46,7 @@
 
   <div class="form-group">
 
-  <label for="categories">Category</label>
-
-  <br>
+  <label for="category">Category</label>
   
     <select name="post_category" id="post_category">
     
@@ -73,12 +72,39 @@
   </div>
 
   <div class="form-group">
+
+  <label for="post_user">Users</label>
+  
+    <select name="post_user" id="post_user">
+    
+      <?php 
+      
+      $users_query = "SELECT * FROM users";
+      $select_users = mysqli_query($connection, $users_query);
+
+      confirmQuery($select_users);
+                                             
+      while($row = mysqli_fetch_assoc($select_users)) {
+      $user_id = $row['user_id'];
+      $username = $row['username'];
+
+      echo "<option value='{$username}'>{$username}</option>";
+
+      }
+
+      ?>
+    
+    </select>
+  
+  </div>
+
+  <!-- <div class="form-group">
   
     <label for="author">Post Author</label>
 
       <input type="text" class="form-control" name="author">
   
-  </div>
+  </div> -->
 
   <div class="form-group">
 
