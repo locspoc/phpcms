@@ -123,6 +123,8 @@ if(isset($_POST['update_post'])) {
   <label for="post_user">Users</label>
   
     <select name="post_user" id="post_user">
+
+    <?php echo "<option value='{$post_user}'>{$post_user}</option>"; ?>
     
       <?php 
       
@@ -135,15 +137,15 @@ if(isset($_POST['update_post'])) {
       $user_id = $row['user_id'];
       $username = $row['username'];
 
-      if ($user_id == $post_user_id){
+    //   if ($user_id == $post_user_id){
 
-        echo "<option selected value='{$user_id}'>{$username}</option>";
+        // echo "<option selected value='{$user_id}'>{$username}</option>";
 
-      } else {
+    //   } else {
 
-        echo "<option value='{$user_id}'>{$username}</option>";
+        echo "<option value='{$username}'>{$username}</option>";
 
-      }
+    //   }
 
       }
 
