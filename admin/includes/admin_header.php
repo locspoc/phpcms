@@ -47,6 +47,9 @@ header("Location: ../index.php");
 
     <script src="https://cdn.ckeditor.com/ckeditor5/27.0.0/classic/ckeditor.js"></script>
 
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
 </head>
 
 <body>
