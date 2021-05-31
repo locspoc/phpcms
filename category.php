@@ -11,16 +11,32 @@
 
         <div class="row">
 
+        
+
             <!-- Blog Entries Column -->
             <div class="col-md-8">
+
+            <h1 class="page-header">
+                    List Of All Posts For
+                    <small>TODO: Insert Category Here</small>
+                </h1>
                 
                 <?php
 
-                if(isset($_GET['category'])){
+                if(isset($_GET['cat_id'])){
 
-                  $post_category_id = $_GET['category'];
+                  $post_category_id = $_GET['cat_id'];
+
+                  if(isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'admin' ) {
+
+                    $query = "SELECT * FROM posts WHERE post_category_id = $post_category_id ";
+
+                } else {
+
+                    $query = "SELECT * FROM posts WHERE post_category_id = $post_category_id AND post_status = 'published' ";
+
+                }
                 
-                $query = "SELECT * FROM posts WHERE post_category_id = $post_category_id AND post_status = 'published' ";
                 $select_all_posts_query = mysqli_query($connection, $query);
 
                 if(mysqli_num_rows($select_all_posts_query) < 1) {
@@ -38,11 +54,18 @@
                         $post_content = substr($row['post_content'],0,100);
                         
                         ?>
-                        
-                        <h1 class="page-header">
-                    Page Heading
-                    <small>Secondary Text</small>
-                </h1>
+
+                <!-- <?php
+
+                // $query = "SELECT * FROM categories WHERE cat_id = $post_category_id";
+                // $select_all_categories_query = mysqli_query($connection, $query);
+
+                // while($row = mysqli_fetch_assoc($select_all_categories_query)) {
+                    // $cat_title = $row['cat_title'];
+                    // $cat_id = $row['cat_id'];
+                
+
+                ?> -->
 
                 <!-- First Blog Post -->
                 <h2>
