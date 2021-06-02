@@ -99,7 +99,6 @@ if(isset($_POST['update_post'])) {
 
       if($cat_id == $post_category_id) {
 
-      
         echo "<option selected value='{$cat_id}'>{$cat_title}</option>";
 
 
@@ -216,7 +215,7 @@ if(isset($_POST['update_post'])) {
     <label for="post_content">Post Content</label>
 
       <textarea class="form-control" name="post_content" id="body" cols="30" rows="10">
-      <?php echo $post_content; ?>
+      <?php echo str_replace('\r\n','</br>',$post_content) ; ?>
       </textarea>
   
   </div>
