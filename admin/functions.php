@@ -146,4 +146,30 @@ function recordCount($table){
 
 }
 
+function checkStatus($table, $column, $status){
+
+    global $connection;
+
+    $query = "SELECT * FROM $table WHERE $column = '$status'";
+    $result = mysqli_query($connection,$query);
+
+    confirmQuery($result);
+    
+    return mysqli_num_rows($result);
+
+}
+
+function checkUserRole($table, $column, $role){
+
+    global $connection;
+
+    $query = "SELECT * FROM $table WHERE $column = '$role'";
+    $result = mysqli_query($connection,$query);
+
+    confirmQuery($result);
+
+    return mysqli_num_rows($result);
+
+}
+
 ?>
